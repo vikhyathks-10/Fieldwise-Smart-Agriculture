@@ -213,3 +213,14 @@ Additional project documentation is available in the `docs/` directory:
 **Academic Project**
 
 Developed by Vikhyath Bharadwaj K S and Yaseen Mulla.
+
+## Project Objectives
+
+The main objectives of Fieldwise are:
+
+- To organize farmer and farm-related information in a centralized system.
+- To maintain cultivation records and agricultural information.
+- To integrate MySQL and MongoDB for structured and weather-related data.
+- To provide separate interfaces for administrators and farmers.
+- To demonstrate practical database management concepts through a real-world application.
+
