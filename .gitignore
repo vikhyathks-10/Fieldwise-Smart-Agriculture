@@ -1,29 +1,45 @@
+
+# Dependencies
 node_modules/
+**/node_modules/
+
+# Build files
 dist/
+**/dist/
+coverage/
+**/coverage/
+
+# Environment secrets
 .env
 .env.*
+**/.env
+**/.env.*
 !.env.example
+!**/.env.example
+
+# Logs
 npm-debug.log*
+*.log
 
-# Local credentials
-backend/.env
-backend/.env.*
-!backend/.env.example
-
-# Audit archives may contain credentials
+# Archives and backups
 *.zip
-
-# Local backups
 backups/
+**/backups/
 
-# Build and dependency files
-node_modules/
-dist/
-coverage/
+# Temporary duplicate repositories
+Fieldwise_GitHub_Final/
+Fieldwise_GitHub_Push/
 
+# IDE and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
 
-# Keep backend and selected documentation out of GitHub
-backend/
+# Exclude README files as requested
 README.md
+**/README.md
+
+# Project audit reports excluded as requested
 Fieldwise_DBMS_Completion_Report.md
 SQL_First_Database_Implementation_Audit.md

@@ -1,0 +1,42 @@
+import { portalService } from '../../business/services/portalService.js'
+import { toAppError } from '../../utils/errors.js'
+
+export const portalController = {
+  adminDashboard: (req,res,next) => run(next, async () => res.json(await portalService.adminDashboard())),
+  listFarmers: (req,res,next) => run(next, async () => res.json(await portalService.listFarmers(req.query.search))),
+  farmerProfile: (req,res,next) => run(next, async () => res.json(await portalService.farmerProfile(req.params.id))),
+  createFarmer: (req,res,next) => run(next, async () => res.status(201).json(await portalService.createFarmer(req.body))),
+  updateFarmer: (req,res,next) => run(next, async () => res.json(await portalService.updateFarmer(req.params.id,req.body))),
+  listFarms: (req,res,next) => run(next, async () => res.json(await portalService.listFarms())),
+  listUpdates: (req,res,next) => run(next, async () => res.json(await portalService.listUpdates(req.query.status))),
+  getUpdate: (req,res,next) => run(next, async () => res.json(await portalService.getAdminUpdate(req.params.id))),
+  reviewUpdate: (req,res,next) => run(next, async () => res.json(await portalService.reviewUpdate(req.user,req.params.id,req.body))),
+  farmerDashboard: (req,res,next) => run(next, async () => res.json(await portalService.farmerDashboard(req.user))),
+  farmerFarms: (req,res,next) => run(next, async () => res.json(await portalService.farmerFarms(req.user))),
+  farmerCultivations: (req,res,next) => run(next, async () => res.json(await portalService.farmerCultivations(req.user))),
+  farmerCrops: (req,res,next) => run(next, async () => res.json(await portalService.farmerCrops(req.user))),
+  farmerSoilTests: (req,res,next) => run(next, async () => res.json(await portalService.farmerSoilTests(req.user))),
+  farmerWeather: (req,res,next) => run(next, async () => res.json(await portalService.farmerWeather(req.user))),
+  farmerFertilizers: (req,res,next) => run(next, async () => res.json(await portalService.farmerFertilizers(req.user))),
+  farmerFertilizerUsage: (req,res,next) => run(next, async () => res.json(await portalService.farmerFertilizerUsage(req.user))),
+  farmerPests: (req,res,next) => run(next, async () => res.json(await portalService.farmerPests(req.user))),
+  farmerAdvisories: (req,res,next) => run(next, async () => res.json(await portalService.farmerAdvisories(req.user))),
+  farmerAlerts: (req,res,next) => run(next, async () => res.json(await portalService.farmerAlerts(req.user))),
+  farmerMarkets: (req,res,next) => run(next, async () => res.json(await portalService.farmerMarkets(req.user,req.query))),
+  farmerUpdates: (req,res,next) => run(next, async () => res.json(await portalService.farmerUpdates(req.user))),
+  farmerUpdate: (req,res,next) => run(next, async () => res.json(await portalService.farmerUpdate(req.user,req.params.id))),
+  submitFarmerUpdate: (req,res,next) => run(next, async () => res.status(201).json(await portalService.submitFarmerUpdate(req.user,req.body))),
+  respondToClarification: (req,res,next) => run(next, async () => res.json(await portalService.respondToClarification(req.user,req.params.id,req.body))),
+  notifications: (req,res,next) => run(next, async () => res.json(await portalService.notifications(req.user))),
+  markNotificationRead: (req,res,next) => run(next, async () => res.json(await portalService.markNotificationRead(req.user,req.params.id))),
+  listAdmins: (req,res,next) => run(next, async () => res.json(await portalService.listAdmins(req.user))),
+  createAdmin: (req,res,next) => run(next, async () => res.status(201).json(await portalService.createAdmin(req.user,req.body))),
+  createAdminAccounts: (req,res,next) => run(next, async () => { const result=await portalService.createAdminAccounts(req.user,req.body?.accounts); return res.status(result.ok?201:422).json(result) }),
+  setAdminStatus: (req,res,next) => run(next, async () => res.json(await portalService.setAdminStatus(req.user,req.params.id,req.body))),
+  listFarmerAccounts: (req,res,next) => run(next, async () => res.json(await portalService.listFarmerAccounts())),
+  createFarmerAccount: (req,res,next) => run(next, async () => res.status(201).json(await portalService.createFarmerAccount(req.user,req.body))),
+  createFarmerAccounts: (req,res,next) => run(next, async () => { const result=await portalService.createFarmerAccounts(req.user,req.body?.accounts); return res.status(result.ok?201:422).json(result) }),
+  setFarmerAccountStatus: (req,res,next) => run(next, async () => res.json(await portalService.setFarmerAccountStatus(req.params.id,req.body))),
+  changePassword: (req,res,next) => run(next, async () => res.json(await portalService.changeFarmerPassword(req.user,req.body)))
+}
+async function run(next, work) { try { return await work() } catch (error) { next(toAppError(error)) } }
