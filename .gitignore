@@ -1,0 +1,29 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+npm-debug.log*
+
+# Local credentials
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Audit archives may contain credentials
+*.zip
+
+# Local backups
+backups/
+
+# Build and dependency files
+node_modules/
+dist/
+coverage/
+
+
+# Keep backend and selected documentation out of GitHub
+backend/
+README.md
+Fieldwise_DBMS_Completion_Report.md
+SQL_First_Database_Implementation_Audit.md
